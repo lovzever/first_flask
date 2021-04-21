@@ -8,6 +8,10 @@
 
 {% block title %}Flasky{% endblock title %}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock scripts %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
@@ -32,6 +36,13 @@
 
 {% block content %}
 <div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
     {% block page_content %}
     {% endblock page_content %}
 </div>
