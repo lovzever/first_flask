@@ -21,3 +21,7 @@ class UserModelTestCase(unittest.TestCase):
         u1 = User(password='cat')
         u2 = User(password='cat')
         self.assertTrue(u1.password_hash != u2.password_hash)
+
+
+
+
