@@ -12,6 +12,11 @@ def index():
     return render_template('index.html')
 
 
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user.html', user=user)
+
+
 # @main.route('/', methods=['GET', 'POST'])
 # def index():
 #     form = NameForm()
