@@ -117,6 +117,15 @@ class User(UserMixin, db.Model):
                 self.role = Role.query.filter_by(default=True).first()
         if self.email is not None and self.avatar_hash is None:
             self.avatar_hash = self.gravatar_hash()
+        self.follow(self)
+
+    @staticmethod
+    def add_self_follows():
+        for user in User.query.all():
+            if not user.is_following(user):
+                user.follow(user)
+                db.session.add(user)
+                db.session.commit()
 
     def ping(self):
         self.last_seen = datetime.utcnow()
